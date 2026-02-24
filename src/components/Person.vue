@@ -1,48 +1,64 @@
 <template>
-    <h1>一个人的信息</h1>
-    <h2>姓名：{{ name }}</h2>
-    <h2>年龄：{{ age }}</h2>
-    <h2>性别：{{ sex }}</h2>
-    <h2>a的值是：{{ a }}</h2>
-    <button @click="sayHello">说话(Vue3所配置的——sayHello)</button>
-    <br>
-    <br>
-    <button @click="sayWelcome">说话(Vue2所配置的——sayWelcome)</button>
-    <br>
-    <br>
-
+    <h2> 情况4 监视对象类型数据的某个属性</h2>
+    <div> name: {{ person.name }}</div>
+    <div> age: {{ person.age }}</div>
+    <button @click="changeName">改名</button>
+    <button @click="changeAge">改年龄</button>
+    <button @click="changeCar1">改车1</button>
+    <button @click="changeCar2">改车2</button>
+    <button @click="changeFullCar">改全量</button>
 </template>
 
 
-//这个相当于是组件的名字
-<!-- <script lang="ts">
-export default {
-    name: 'App',
-    //此处只是测试一下setup，暂时不考虑响应式的问题。
-}
-</script> -->
+//计算属性会有缓存,而方法不会
+<script setup lang="ts" name="person">
+import { reactive, watch } from 'vue'
 
+let person = reactive({
+    name: '张三',
+    age: 18,
+    car:{
+        car1: '奔驰',
+        car2: '宝马'
+    }
 
-//这种形式下就不用return
-<script setup lang="ts">
-import {ref}
-//这样就不用多写一个export default
-defineOptions({ name: 'Personawa' })
-//数据,此时不是响应式的，只是普通的变量
-let name = '张飒';
-let age = 18;
-let sex = '男';
-let a = '13888888888'; a
+});
 
-//方法
-function sayHello() {
-    name = 'zhangsan';
-}
-function sayWelcome() {
-    console.log('Vue2所配置的方法——sayWelcome');
-    age += 1;
+function changeName() {
+    person.name += '!';
 }
 
-//也可以返回函数
-// return () => '哈哈';
+function changeAge(){
+    person.age +=1;
+}
+
+function changeCar1(){
+    person.car.car1 = '奥迪';
+}
+
+function changeCar2(){
+    person.car.car2 = '大众';
+}
+
+function changeFullCar(){
+    person.car = {
+        car1: '奥迪',
+        car2: '大众'
+    }
+}
+
+
+
+//情况4 监视对象类型数据的某个属性,需要函数返回属性值
+watch(()=>{return person.name},(newVal,oldVal)=>{
+    console.log('name变化了',newVal,oldVal);
+});
+
+//情况4 监视对象类型的某个属性,是对象型,更推荐写函数返回属性值
+watch(()=>person.car,(newVal,oldVal)=>{
+    console.log('car1变化了',newVal,oldVal);
+},{deep:true});
+
+
+
 </script>
