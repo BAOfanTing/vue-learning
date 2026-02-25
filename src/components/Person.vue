@@ -1,64 +1,37 @@
 <template>
-    <h2> 情况4 监视对象类型数据的某个属性</h2>
-    <div> name: {{ person.name }}</div>
-    <div> age: {{ person.age }}</div>
-    <button @click="changeName">改名</button>
-    <button @click="changeAge">改年龄</button>
-    <button @click="changeCar1">改车1</button>
-    <button @click="changeCar2">改车2</button>
-    <button @click="changeFullCar">改全量</button>
+    <div class="person">
+        <h1 ref = "title1" id="title1">尚硅谷</h1>
+        <h2 ref = "title2">前端</h2>
+        <h3 ref = "title3">Vue</h3>
+        <input type="text" ref="input"> <br>
+        <button @click="showLog">显示log</button>
+    </div>
+    
+
 </template>
 
 
 //计算属性会有缓存,而方法不会
 <script setup lang="ts" name="person">
-import { reactive, watch } from 'vue'
+import { ref} from 'vue'
 
-let person = reactive({
-    name: '张三',
-    age: 18,
-    car:{
-        car1: '奔驰',
-        car2: '宝马'
-    }
+let title1 = ref();
+let title2 = ref();
+let title3 = ref();
 
-});
+function showLog()
+{
+    //通过id获取元素
+    const t1 = document.getElementById('title1');
+    // const t1 = title1.value;
 
-function changeName() {
-    person.name += '!';
+    console.log((t1 as HTMLElement).innerText)
+    console.log((<HTMLElement>t1).innerText);
+    console.log((t1?.innerText));
+
+    console.log(title1.value);
+    console.log(title2.value);
+    console.log(title3.value);
 }
-
-function changeAge(){
-    person.age +=1;
-}
-
-function changeCar1(){
-    person.car.car1 = '奥迪';
-}
-
-function changeCar2(){
-    person.car.car2 = '大众';
-}
-
-function changeFullCar(){
-    person.car = {
-        car1: '奥迪',
-        car2: '大众'
-    }
-}
-
-
-
-//情况4 监视对象类型数据的某个属性,需要函数返回属性值
-watch(()=>{return person.name},(newVal,oldVal)=>{
-    console.log('name变化了',newVal,oldVal);
-});
-
-//情况4 监视对象类型的某个属性,是对象型,更推荐写函数返回属性值
-watch(()=>person.car,(newVal,oldVal)=>{
-    console.log('car1变化了',newVal,oldVal);
-},{deep:true});
-
-
 
 </script>
