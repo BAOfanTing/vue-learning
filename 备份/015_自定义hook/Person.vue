@@ -7,6 +7,8 @@
    <img v-for="(u,index) in dogList" :key="index" :src="u">
    <span v-show="isLoading.valueOf()">加载中...</span><br>
    <button @click="getDog">再来一只狗</button>
+
+
 </template>
 
 
