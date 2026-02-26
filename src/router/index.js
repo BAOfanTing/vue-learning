@@ -30,8 +30,18 @@ const router = createRouter({
 						{
 							//params参数 需要占位,在参数后加一个问号可传可不传
 							name:'xiangqing',
-							path:'detail/:id/:title/:content?',
+							// path:'detail/:id/:title/:content?',
+							path:'detail',
 							component:Detail,
+
+							//第一种写法将路由所有的params参数映射为组件的props 
+							// props:true
+
+							//第二种写法 函数写法,可以自己决定传设么参数,path就写成detial就行,query参数会自动映射为组件的props
+							props(route){
+								console.log('11111111',route);
+								return route.query;		
+							}
 						}
 					]
 				}

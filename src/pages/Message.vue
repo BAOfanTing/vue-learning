@@ -5,10 +5,10 @@
 				<router-link :to="{
 					//只能使用name来匹配路由
 					name:'xiangqing',
-					params:{
+					query:{
 						id:m.id,
 						title:m.title,
-						// content:m.content	
+						content:m.content	
 					}
 				}">
 					
