@@ -1,17 +1,21 @@
 <template>
 	<h1>消息详情</h1>
 	<li>
-		标号:{{ query.id }}
+		//使用params参数获取路由参数
+		标号:{{ route.params.id }}
 	</li>
 	<li>
-		消息:{{ query.title }}
+		消息:{{ route.params.title }}
+	</li>
+	<li>
+		内容:{{ route.params.content }}
 	</li>
 </template>
 
 <script setup lang="ts" name="Detail">
-import { toRefs } from 'vue'
 import { useRoute } from 'vue-router'
-let route = useRoute();
-let {query} = toRefs(route);
-console.log('@', route);
+
+const route = useRoute()
+console.log(route.params)
+
 </script>

@@ -28,7 +28,9 @@ const router = createRouter({
 					component:Message,
 					children:[
 						{
-							path:'detail',
+							//params参数 需要占位,在参数后加一个问号可传可不传
+							name:'xiangqing',
+							path:'detail/:id/:title/:content?',
 							component:Detail,
 						}
 					]
