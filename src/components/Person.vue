@@ -1,38 +1,24 @@
 <template>
 
    <h1> {{ sum }}</h1>
-   <button @click="add">点我</button>
+   <button @click="increment">点我+1</button>
+   <button @click="decrement">点我-1</button>
+   <hr>
+   <img v-for="(u,index) in dogList" :key="index" :src="u">
+   <span v-show="isLoading.valueOf()">加载中...</span><br>
+   <button @click="getDog">再来一只狗</button>
+
 
 </template>
 
 
 <script setup lang="ts" name="person">
-import {ref,onBeforeMount,onMounted,onBeforeUnmount,onUnmounted,onBeforeUpdate,onUpdated} from 'vue'
+import {ref} from 'vue'
+import useSum from '../hooks/useSum'
+import useDog from '../hooks/useDog'
 
-let sum = ref(0);
-function add(){
-    sum.value++;
-}
-
-onBeforeMount(()=>{
-    console.log("挂载前");
-})
-onMounted(()=>{
-    console.log("挂在后");
-})
-
-onBeforeUnmount(()=>{
-    console.log("卸载前");
-})
-onUnmounted(()=>{
-    console.log("卸载后");
-})
-onBeforeUpdate(()=>{
-    console.log("更新前");
-})
-onUpdated(()=>{
-    console.log("更新后");
-})
+let {sum,increment,decrement} = useSum();
+let {dogList,getDog,isLoading} = useDog();
 
 
 
