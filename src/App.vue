@@ -25,4 +25,18 @@ import {useCountStore} from './store/count'
 const countStore = useCountStore();
 const talkStore = useTalkStore();
 
+import {useRouter} from 'vue-router'
+import {onMounted} from 'vue'
+
+let router = useRouter();
+
+//编程式导航
+onMounted(()=>{
+  setTimeout(()=>{
+    console.log(111);
+    router.push('/about');
+  },3000)
+})
+
+
 </script>
