@@ -2,7 +2,7 @@
 	<div>
 		<ul>
 			<li v-for="m in messageList" :key="m.id">
-				<router-link :to="{
+				<router-link replace :to="{
 					//只能使用name来匹配路由
 					name:'xiangqing',
 					query:{

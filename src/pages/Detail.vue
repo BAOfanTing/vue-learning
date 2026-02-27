@@ -14,6 +14,14 @@
 
 <script setup lang="ts" name="Detail">
 import {defineProps} from 'vue'
+import {useRoute,useRouter} from 'vue-router'
+let route = useRoute();
+let router = useRouter();
+console.log(route.query);
+console.log(route.params);
+console.log(router.push);
+console.log(router.replace);
+
 
 defineProps(['id','title','content']);
 
