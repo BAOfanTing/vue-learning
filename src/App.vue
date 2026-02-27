@@ -5,7 +5,8 @@
     <router-link to="/home">Home</router-link>
     <router-view></router-view>
 
-    <h2>当前的计算值为{{ countStore.sum }}</h2>
+    <h2>当前的计算值为{{ countStore.bigSum }}</h2>
+    <button @click="countStore.changeSum">增加</button>
 
     <ul>
       <li v-for="talk in talkStore.talkList" :key="talk.id">
@@ -25,18 +26,22 @@ import {useCountStore} from './store/count'
 const countStore = useCountStore();
 const talkStore = useTalkStore();
 
+countStore.$subscribe((mutation,state)=>{
+  console.log(mutation,state);
+})
+
 import {useRouter} from 'vue-router'
 import {onMounted} from 'vue'
 
 let router = useRouter();
 
 //编程式导航
-onMounted(()=>{
-  setTimeout(()=>{
-    console.log(111);
-    router.push('/about');
-  },3000)
-})
+// onMounted(()=>{
+//   setTimeout(()=>{
+//     console.log(111);
+//     router.push('/about');
+//   },3000)
+// })
 
 
 </script>
