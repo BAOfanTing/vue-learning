@@ -1,47 +1,45 @@
 <template>
-  <div>
-    <h1>Vue Router Demo</h1>
-    <router-link to="/about">About</router-link>
-    <router-link to="/home">Home</router-link>
-    <router-view></router-view>
-
-    <h2>当前的计算值为{{ countStore.bigSum }}</h2>
-    <button @click="countStore.changeSum">增加</button>
-
-    <ul>
-      <li v-for="talk in talkStore.talkList" :key="talk.id">
-        {{ talk.content }}
-      </li>
-    </ul>
-  </div>
-    
+	<div class="container-fluid wraper">
+		<h1 class="title">
+			Vue3 组件间通信
+		</h1>
+		<hr>
+		<div class="row">
+			<div class="col-xs-3 col-md-3 col-lg-3 col-xl-3">
+				<!-- 导航区 -->
+				<router-link active-class="active" class="list-group-item" to="/props">1. props</router-link>
+				<router-link active-class="active" class="list-group-item" to="/event">2. 自定义事件</router-link>
+				<router-link active-class="active" class="list-group-item" to="/mitt">3. mitt</router-link>
+				<router-link active-class="active" class="list-group-item" to="/model">4. v-model</router-link>
+				<router-link active-class="active" class="list-group-item" to="/attrs">5. $attrs</router-link>
+				<router-link active-class="active" class="list-group-item" to="/ref-parent">6. <span class="small">$refs、$parent</span></router-link>
+				<router-link active-class="active" class="list-group-item" to="/provide-inject">7. provide、inject</router-link>
+				<router-link active-class="active" class="list-group-item" to="/pinia">8. pinia</router-link>
+				<router-link active-class="active" class="list-group-item" to="/slot">9. slot</router-link>
+			</div>
+			<div class="col-xs-9 col-md-9 col-lg-9 col-xl-9">
+				<div class="panel-body">
+					<!-- 占位一个展示区 -->
+					<router-view></router-view>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script setup lang="ts" name="App">
-//引入对应的store
-import {useTalkStore} from './store/talk'
-import {useCountStore} from './store/count'
-
-//调用对应的store
-const countStore = useCountStore();
-const talkStore = useTalkStore();
-
-countStore.$subscribe((mutation,state)=>{
-  console.log(mutation,state);
-})
-
-import {useRouter} from 'vue-router'
-import {onMounted} from 'vue'
-
-let router = useRouter();
-
-//编程式导航
-// onMounted(()=>{
-//   setTimeout(()=>{
-//     console.log(111);
-//     router.push('/about');
-//   },3000)
-// })
-
-
 </script>
+
+<style>
+	.wraper .title {
+		padding: 20px;
+		text-align: center;
+		min-width: 610px;
+	}
+	.wraper .small{
+		font-size: 15px;
+	}
+	.wraper .list-group-item {
+		min-width: 230px;
+	}
+</style>
