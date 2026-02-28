@@ -1,17 +1,30 @@
 <template>
   <div class="child1">
     <h3>子组件1</h3>
-		<h4>玩具：{{ toy }}</h4>
-		<button @click="emitter.emit('send-toy',toy)">玩具给弟弟</button>
+	<h2>弟弟给哥哥的玩具是{{toy}}</h2>
+	<button @click="send">给弟弟玩具</button>	
   </div>
 </template>
 
 <script setup lang="ts" name="Child1">
-	import {ref} from 'vue'
-	import emitter from '@/utils/emitter';
+	import {ref,onMounted,onUnmounted} from 'vue'
+import emitter from '@/utils/emitter';
+let toy = ref('');
 
-	// 数据
-	let toy = ref('奥特曼')
+function send(){
+	//发送事件,同时发送需要传递的参数
+	emitter.emit('send-toy','巴斯光年');
+}
+
+onMounted(()=>{
+	emitter.on('send-toy1',(value)=>{
+		console.log('子1 接收到 send-toy 事件：', value)
+		toy.value = value as string;
+	})
+})
+onUnmounted(()=>{
+	emitter.off('send-toy');
+	})
 </script>
 
 <style scoped>

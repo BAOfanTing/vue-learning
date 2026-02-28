@@ -1,29 +1,28 @@
-// 引入mitt
-import mitt from 'mitt'
+//引入mitt
+import mitt from "mitt";
 
-// 调用mitt得到emitter，emitter能：绑定事件、触发事件
-const emitter = mitt()
+//创建emitter
+const emitter = mitt();
 
-/* // 绑定事件
-emitter.on('test1',()=>{
-  console.log('test1被调用了')
-})
-emitter.on('test2',()=>{
-  console.log('test2被调用了')
-})
+// //绑定事件
+// emitter.on('abc',(value)=>{
+//     console.log('abc事件触发了',value);
+// })
 
-// 触发事件
-setInterval(() => {
-  emitter.emit('test1')
-  emitter.emit('test2')
-}, 1000);
+// emitter.on('xyz',(value)=>{
+//     console.log('xyz事件触发了',value);
+// })
 
-setTimeout(() => {
-  // emitter.off('test1')
-  // emitter.off('test2')
-  emitter.all.clear()
-}, 3000); */
+// //定时触发事件
+// setInterval(()=>{
+//     emitter.emit('abc','hello');
+//     emitter.emit('xyz','world');
+// },2000)
 
+// //不再清除事件监听器，这样你可以持续看到效果
+// setTimeout(()=>{
+//     emitter.all.clear();
+// },3000)
 
-// 暴露emitter
+//创建并暴露mitt
 export default emitter

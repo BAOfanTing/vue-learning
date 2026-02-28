@@ -1,26 +1,35 @@
 <template>
   <div class="child2">
     <h3>子组件2</h3>
-		<h4>电脑：{{ computer }}</h4>
-		<h4>哥哥给的玩具：{{ toy }}</h4>
+	<h2>哥哥给弟弟的玩具{{ toy }}</h2>
+	<button @click="sendToGege">给弟弟玩具</button>	
   </div>
 </template>
 
 <script setup lang="ts" name="Child2">
-	import {ref,onUnmounted} from 'vue'
+	import {ref,onUnmounted, onMounted} from 'vue'
 	import emitter from '@/utils/emitter';
-	// 数据
-	let computer = ref('联想')
-	let toy = ref('')
+	let toy = ref('');
+	//跟qt的信号槽机制差不多
+	emitter.on('send-toy',(value)=>{
+		console.log('子2 接收到 send-toy 事件：', value)
+		toy.value = value as string;
+	})
 
-	// 给emitter绑定send-toy事件
-	emitter.on('send-toy',(value:any)=>{
-		toy.value = value
-	})
-	// 在组件卸载时解绑send-toy事件
 	onUnmounted(()=>{
-		emitter.off('send-toy')
+		emitter.off('send-toy');
 	})
+
+	function sendToGege(){
+		//发送事件,同时发送需要传递的参数
+		emitter.emit('send-toy1','闪电库迪');
+	}
+
+
+
+
+
+
 </script>
 
 <style scoped>
