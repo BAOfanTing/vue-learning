@@ -1,21 +1,20 @@
 <template>
-  <input 
-    type="text" 
-    :value="ming"
-    @input="emit('update:ming',(<HTMLInputElement>$event.target).value)"
-  >
+  <input type="text" v-model="userName">
   <br>
-  <input 
-    type="text" 
-    :value="mima"
-    @input="emit('update:mima',(<HTMLInputElement>$event.target).value)"
-  >
+  <input
+  type = "text"
+  :value="userName"
+  @input="userName=(<HTMLInputElement>$event.target).value"
+    >
 </template>
 
 <script setup lang="ts" name="AtguiguInput">
-  defineProps(['ming','mima'])
-  const emit = defineEmits(['update:ming','update:mima'])
+import { ref } from 'vue'
+
+const userName = ref('')
+
 </script>
+
 
 <style scoped>
   input {
