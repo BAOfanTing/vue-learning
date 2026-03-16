@@ -5,7 +5,7 @@
 		<h4>b：{{b}}</h4>
 		<h4>c：{{c}}</h4>
 		<h4>d：{{d}}</h4>
-		<Child :a="a" :b="b" :c="c" :d="d" v-bind="{x:100,y:200}" :updateA="updateA"/>
+		<Child :a="a" :b="b" :c="c" :d="d"/>
   </div>
 </template>
 
@@ -18,9 +18,6 @@
 	let c = ref(3)
 	let d = ref(4)
 
-	function updateA(value:number){
-		a.value += value
-	}
 </script>
 
 <style scoped>

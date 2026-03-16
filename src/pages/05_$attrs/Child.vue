@@ -1,12 +1,16 @@
 <template>
 	<div class="child">
 		<h3>子组件</h3>
-		<GrandChild v-bind="$attrs"/>
+		<h4>a：{{ a }}</h4>
+		<GrandChild v-bind="$attrs">
+			
+		</GrandChild>
 	</div>
 </template>
 
 <script setup lang="ts" name="Child">
 	import GrandChild from './GrandChild.vue'
+	defineProps(['a'])
 </script>
 
 <style scoped>

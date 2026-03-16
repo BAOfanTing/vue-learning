@@ -15,7 +15,7 @@
 
 	// 方法
 	function minusHouse(parent:any){
-		parent.house -= 1
+		parent.house -=2;
 	}
 
 	// 把数据交给外部
